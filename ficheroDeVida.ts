@@ -40,7 +40,7 @@ document.querySelector("#continente")?.addEventListener("change", () => {
             var optionInicial = document.createElement("option");
             optionInicial.value = "0";
             optionInicial.text = "Seleccciona pais...";
-            selectPaises?.appendChild(optionInicial)
+            selectPaises?.appendChild(optionInicial);
             datos.forEach((pais:
                 {
                     name: {
@@ -66,12 +66,14 @@ document.querySelector("#continente")?.addEventListener("change", () => {
 
               });
               
-              let btnGeneral = document.querySelector('#generales')
+              /* let btnGeneral = document.querySelector('#generales')
 
               btnGeneral?.addEventListener('click', function(){
                 let paisSel =(selectPaises as HTMLSelectElement).selectedOptions[0].value
                 let contenido = document.querySelector('#contenido')
                 let h1Contenido = document.createElement('h1')
+
+                let paisSeleccionado = 
                 h1Contenido.innerHTML = paisSel
                 contenido?.appendChild(h1Contenido)
                 
@@ -79,7 +81,109 @@ document.querySelector("#continente")?.addEventListener("change", () => {
                 
                 
 
-        })
+        }) */
+
+        // ... (código anterior)
+
+let btnGeneral = document.querySelector('#generales') as HTMLButtonElement;
+let btnGeograficos = document.querySelector('#geograficos') as HTMLButtonElement;
+let btnBanderas = document.querySelector('#banderas') as HTMLButtonElement;
+let btnTraducciones = document.querySelector('#traducciones') as HTMLButtonElement;
+
+btnGeneral?.addEventListener('click', function () {
+    let paisSel = (selectPaises as HTMLSelectElement).selectedOptions[0].value;
+    let contenido = document.querySelector('#contenido');
+    let h3Contenido = document.createElement('h3');
+
+    // Encuentra el país correspondiente en los datos
+    let paisSeleccionado = datos.find((pais: any) => pais.name.common === paisSel);
+
+    if (paisSeleccionado) {
+        // Combina el nombre común y la capital en un enlace
+        let enlace = `Nombre común:${paisSeleccionado.name.common}</br> Nombre Oficial: ${paisSeleccionado.name.official} </br>
+        Capital:${paisSeleccionado.capital} </br> Población:${paisSeleccionado.population}`;
+        
+        // Limpia el contenido actual antes de agregar el nuevo enlace
+        if (contenido) {
+            contenido.innerHTML = "";
+        }
+        
+        // Agrega el nuevo enlace al elemento h1Contenido
+        h3Contenido.innerHTML = enlace;
+        contenido?.appendChild(h3Contenido);
+    }
+});
+btnGeograficos?.addEventListener('click', function () {
+    let paisSel = (selectPaises as HTMLSelectElement).selectedOptions[0].value;
+    let contenido = document.querySelector('#contenido');
+    let h3Contenido = document.createElement('h3');
+
+    // Encuentra el país correspondiente en los datos
+    let paisSeleccionado = datos.find((pais: any) => pais.name.common === paisSel);
+
+    if (paisSeleccionado) {
+        // Combina el nombre común y la capital en un enlace
+        let enlace = `Area:${paisSeleccionado.area}</br> Frontera: ${paisSeleccionado.borders} </br>
+        <a href="${paisSeleccionado.googleMaps}" target="_blank">Google Maps:</a> </br> <a href="${paisSeleccionado.openStreetMaps}" target="_blank">Open Street Maps:</a>`;
+        
+        // Limpia el contenido actual antes de agregar el nuevo enlace
+        if (contenido) {
+            contenido.innerHTML = "";
+        }
+        
+        // Agrega el nuevo enlace al elemento h1Contenido
+        h3Contenido.innerHTML = enlace;
+        contenido?.appendChild(h3Contenido);
+    }
+});
+btnBanderas?.addEventListener('click', function () {
+    let paisSel = (selectPaises as HTMLSelectElement).selectedOptions[0].value;
+    let contenido = document.querySelector('#contenido');
+    let h3Contenido = document.createElement('h3');
+
+    // Encuentra el país correspondiente en los datos
+    let paisSeleccionado = datos.find((pais: any) => pais.name.common === paisSel);
+
+    if (paisSeleccionado) {
+        // Combina el nombre común y la capital en un enlace
+        let enlace = `Escudo: <img src="${paisSeleccionado.coatOfArms.svg}" width="100px" height="100px"/></br> 
+        Bandera: <img src="${paisSeleccionado.flags.svg}" width="100px" height="100px"/>`;
+        
+        // Limpia el contenido actual antes de agregar el nuevo enlace
+        if (contenido) {
+            contenido.innerHTML = "";
+        }
+        
+        // Agrega el nuevo enlace al elemento h1Contenido
+        h3Contenido.innerHTML = enlace;
+        h3Contenido.style.lineHeight = '4em';
+        contenido?.appendChild(h3Contenido);
+    }
+});
+btnTraducciones?.addEventListener('click', function () {
+    let paisSel = (selectPaises as HTMLSelectElement).selectedOptions[0].value;
+    let contenido = document.querySelector('#contenido');
+    let h3Contenido = document.createElement('h3');
+
+    // Encuentra el país correspondiente en los datos
+    let paisSeleccionado = datos.find((pais: any) => pais.name.common === paisSel);
+
+    if (paisSeleccionado) {
+        // Combina el nombre común y la capital en un enlace
+        let enlace = `Traducción: ${paisSeleccionado.translations}`;
+        
+        // Limpia el contenido actual antes de agregar el nuevo enlace
+        if (contenido) {
+            contenido.innerHTML = "";
+        }
+        
+        // Agrega el nuevo enlace al elemento h1Contenido
+        h3Contenido.innerHTML = enlace;
+        h3Contenido.style.lineHeight = '4em';
+        contenido?.appendChild(h3Contenido);
+    }
+});
+
 })
 
 
