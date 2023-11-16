@@ -83,14 +83,15 @@ btnGeneral?.addEventListener('click', function () {
 
     if (paisSeleccionado) {
         // Combina el nombre común y la capital en un enlace
-        let enlace = `Nombre común:${paisSeleccionado.name.common}</br> Nombre Oficial: ${paisSeleccionado.name.official} </br>
-        Capital:${paisSeleccionado.capital} </br> Población:${paisSeleccionado.population}`;
+        let enlace = `Nombre común: ${paisSeleccionado.name.common}</br> Nombre Oficial: ${paisSeleccionado.name.official} </br>
+        Capital: ${paisSeleccionado.capital} </br> Población: ${paisSeleccionado.population}`;
         
         // Limpia el contenido actual antes de agregar el nuevo enlace
         limpiarContenido()
         
         // Agrega el nuevo enlace al elemento h1Contenido
         h3Contenido.innerHTML = enlace;
+        h3Contenido.style.lineHeight = '2em';
         contenido?.appendChild(h3Contenido);
     }
 });
@@ -104,14 +105,15 @@ btnGeograficos?.addEventListener('click', function () {
 
     if (paisSeleccionado) {
         // Combina el nombre común y la capital en un enlace
-        let enlace = `Area:${paisSeleccionado.area}</br> Frontera: ${paisSeleccionado.borders} </br>
-        <a href="${paisSeleccionado.googleMaps}" target="_blank">Google Maps:</a> </br> <a href="${paisSeleccionado.openStreetMaps}" target="_blank">Open Street Maps:</a>`;
+        let enlace = `Area: ${paisSeleccionado.area}</br> Frontera: ${paisSeleccionado.borders} </br>
+        <a href="${paisSeleccionado.maps.googleMaps}" target="_blank">Google Maps</a> </br> <a href="${paisSeleccionado.maps.openStreetMaps}" target="_blank">Open Street Maps</a>`;
         
         // Limpia el contenido actual antes de agregar el nuevo enlace
         limpiarContenido()
         
         // Agrega el nuevo enlace al elemento h1Contenido
         h3Contenido.innerHTML = enlace;
+        h3Contenido.style.lineHeight = '2em';
         contenido?.appendChild(h3Contenido);
     }
 });
@@ -134,7 +136,7 @@ btnBanderas?.addEventListener('click', function () {
         
         // Agrega el nuevo enlace al elemento h1Contenido
         h3Contenido.innerHTML = enlace;
-        h3Contenido.style.lineHeight = '4em';
+        h3Contenido.style.lineHeight = '5em';
         contenido?.appendChild(h3Contenido);
     }
 });
