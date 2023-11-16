@@ -2,7 +2,6 @@ var _a;
 import { Paises } from "./clases/Paises.js";
 let paises = new Paises();
 let paisesRecibidos = [];
-let div = document.querySelector("#contenido");
 let contenido = document.querySelector('#contenido');
 /*paises.getDatos("https://restcountries.com/v3.1/region/europe").then(datos => {
     paisesRecibidos = datos
