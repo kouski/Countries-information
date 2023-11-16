@@ -3,6 +3,7 @@ import { Paises } from "./clases/Paises.js";
 let paises = new Paises()
 let paisesRecibidos: Array<any> = []
 let div = document.querySelector("#contenido")
+let contenido = document.querySelector('#contenido');
 /*paises.getDatos("https://restcountries.com/v3.1/region/europe").then(datos => {
     paisesRecibidos = datos
   
@@ -30,7 +31,7 @@ document.querySelector("#continente")?.addEventListener("change", () => {
         let option = document.createElement("option");
         option.value = "0";
         option.text = "Seleciona Pais....";
-        (h1 as HTMLHeadingElement).innerHTML = "Deber seleccionar un continente"
+        (h1 as HTMLHeadingElement).innerHTML = "Debes seleccionar un continente"
         selectPaises?.appendChild(option)
     }
 
@@ -66,24 +67,6 @@ document.querySelector("#continente")?.addEventListener("change", () => {
 
               });
               
-              /* let btnGeneral = document.querySelector('#generales')
-
-              btnGeneral?.addEventListener('click', function(){
-                let paisSel =(selectPaises as HTMLSelectElement).selectedOptions[0].value
-                let contenido = document.querySelector('#contenido')
-                let h1Contenido = document.createElement('h1')
-
-                let paisSeleccionado = 
-                h1Contenido.innerHTML = paisSel
-                contenido?.appendChild(h1Contenido)
-                
-                
-                
-                
-
-        }) */
-
-        // ... (código anterior)
 
 let btnGeneral = document.querySelector('#generales') as HTMLButtonElement;
 let btnGeograficos = document.querySelector('#geograficos') as HTMLButtonElement;
@@ -104,9 +87,7 @@ btnGeneral?.addEventListener('click', function () {
         Capital:${paisSeleccionado.capital} </br> Población:${paisSeleccionado.population}`;
         
         // Limpia el contenido actual antes de agregar el nuevo enlace
-        if (contenido) {
-            contenido.innerHTML = "";
-        }
+        limpiarContenido()
         
         // Agrega el nuevo enlace al elemento h1Contenido
         h3Contenido.innerHTML = enlace;
@@ -127,9 +108,7 @@ btnGeograficos?.addEventListener('click', function () {
         <a href="${paisSeleccionado.googleMaps}" target="_blank">Google Maps:</a> </br> <a href="${paisSeleccionado.openStreetMaps}" target="_blank">Open Street Maps:</a>`;
         
         // Limpia el contenido actual antes de agregar el nuevo enlace
-        if (contenido) {
-            contenido.innerHTML = "";
-        }
+        limpiarContenido()
         
         // Agrega el nuevo enlace al elemento h1Contenido
         h3Contenido.innerHTML = enlace;
@@ -147,12 +126,11 @@ btnBanderas?.addEventListener('click', function () {
     if (paisSeleccionado) {
         // Combina el nombre común y la capital en un enlace
         let enlace = `Escudo: <img src="${paisSeleccionado.coatOfArms.svg}" width="100px" height="100px"/></br> 
-        Bandera: <img src="${paisSeleccionado.flags.svg}" width="100px" height="100px"/>`;
+        Bandera: <img src="${paisSeleccionado.flags.svg}" width="100px" height="100px"/>
+        `;
         
         // Limpia el contenido actual antes de agregar el nuevo enlace
-        if (contenido) {
-            contenido.innerHTML = "";
-        }
+        limpiarContenido()
         
         // Agrega el nuevo enlace al elemento h1Contenido
         h3Contenido.innerHTML = enlace;
@@ -173,9 +151,7 @@ btnTraducciones?.addEventListener('click', function () {
         let enlace = `Traducción: ${paisSeleccionado.translations}`;
         
         // Limpia el contenido actual antes de agregar el nuevo enlace
-        if (contenido) {
-            contenido.innerHTML = "";
-        }
+        limpiarContenido()
         
         // Agrega el nuevo enlace al elemento h1Contenido
         h3Contenido.innerHTML = enlace;
@@ -188,3 +164,10 @@ btnTraducciones?.addEventListener('click', function () {
 
 
 })
+
+
+function limpiarContenido(){
+    if (contenido) {
+        contenido.innerHTML = "";
+    }
+}
