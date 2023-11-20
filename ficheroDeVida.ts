@@ -1,8 +1,8 @@
 import { Paises } from "./clases/Paises.js";
 
 let paises = new Paises()
-let paisesRecibidos: Array<any> = []
 let contenido = document.querySelector('#contenido');
+
 /*paises.getDatos("https://restcountries.com/v3.1/region/europe").then(datos => {
     paisesRecibidos = datos
   
@@ -115,6 +115,7 @@ btnGeograficos?.addEventListener('click', function () {
         // Limpia el contenido actual antes de agregar el nuevo enlace
         limpiarContenido()
         
+        
         // Agrega el nuevo enlace al elemento h1Contenido
         h3Contenido.innerHTML = enlace;
         h3Contenido.style.lineHeight = '2em';
@@ -132,8 +133,8 @@ btnBanderas?.addEventListener('click', function () {
 
     if (paisSeleccionado) {
         // Combina el nombre común y la capital en un enlace
-        let enlace = `Escudo: <img src="${paisSeleccionado.coatOfArms.svg}" width="100px" height="100px"/></br> 
-        Bandera: <img src="${paisSeleccionado.flags.svg}" width="100px" height="100px"/>
+        let enlace = `Escudo: <img src="${paisSeleccionado.coatOfArms.svg}" width="100px" height="100px" alt="Imagen del escudo de armas"/></br> 
+        Bandera: <img src="${paisSeleccionado.flags.svg}" width="100px" height="100px" alt="${paisSeleccionado.flags.alt}"/>
         `;
         
         // Limpia el contenido actual antes de agregar el nuevo enlace
@@ -149,13 +150,20 @@ btnTraducciones?.addEventListener('click', function () {
     let paisSel = (selectPaises as HTMLSelectElement).selectedOptions[0].value;
     let contenido = document.querySelector('#contenido');
     let h3Contenido = document.createElement('h3');
+    
 
     // Encuentra el país correspondiente en los datos
     let paisSeleccionado = datos.find((pais: any) => pais.name.common === paisSel);
 
     if (paisSeleccionado) {
-        // Combina el nombre común y la capital en un enlace
-        let enlace = `Traducción: ${paisSeleccionado.translations}`;
+        // Obtén todas las traducciones disponibles
+        const traducciones = paisSeleccionado.translations || {};
+
+        // Combina todas las traducciones en un enlace
+        let enlace = "Traducciones:</br>";
+        Object.entries(traducciones).forEach(([idioma, traduccion]: [string, any]) => {
+            enlace += `${idioma}: ${traduccion.official || 'No disponible'}</br>`;
+        });
         
         // Limpia el contenido actual antes de agregar el nuevo enlace
         limpiarContenido()
