@@ -3,21 +3,6 @@ import { Paises } from "./clases/Paises.js";
 let paises = new Paises()
 let contenido = document.querySelector('#contenido');
 
-/*paises.getDatos("https://restcountries.com/v3.1/region/europe").then(datos => {
-    paisesRecibidos = datos
-  
-    paisesRecibidos.forEach(pais => {
-        let h1 = document.createElement("h1")
-        h1.innerHTML = `${pais.name.official} - ${pais.capital}`
-        div?.appendChild(h1)
-    })
-}).catch(error=>{//respuesta del error
-    let h1= document.createElement("h1")
-    h1.innerHTML=error
-    div?.appendChild(h1)
-})*/
-
-
 
 document.querySelector("#continente")?.addEventListener("change", () => {
     let h1 = document.querySelector("#error");
@@ -109,7 +94,7 @@ btnGeograficos?.addEventListener('click', function () {
 
     if (paisSeleccionado) {
         // Combina el nombre común y la capital en un enlace
-        let enlace = `Area: ${paisSeleccionado.area}</br> Frontera: ${paisSeleccionado.borders} </br>
+        let enlace = `Area: ${paisSeleccionado.area}</br> Frontera: ${paisSeleccionado.borders || 'Es isla o no está disponible la frontera'} </br>
         <a href="${paisSeleccionado.maps.googleMaps}" target="_blank">Google Maps</a> </br> <a href="${paisSeleccionado.maps.openStreetMaps}" target="_blank">Open Street Maps</a>`;
         
         // Limpia el contenido actual antes de agregar el nuevo enlace
@@ -133,7 +118,7 @@ btnBanderas?.addEventListener('click', function () {
 
     if (paisSeleccionado) {
         // Combina el nombre común y la capital en un enlace
-        let enlace = `Escudo: <img src="${paisSeleccionado.coatOfArms.svg}" width="100px" height="100px" alt="Imagen del escudo de armas"/></br> 
+        let enlace = `Escudo: <img src="${paisSeleccionado.coatOfArms.svg}" width="100px" height="100px" alt="Imagen del escudo de armas" style="margin-right: 50px"/> 
         Bandera: <img src="${paisSeleccionado.flags.svg}" width="100px" height="100px" alt="${paisSeleccionado.flags.alt}"/>
         `;
         
@@ -143,6 +128,7 @@ btnBanderas?.addEventListener('click', function () {
         // Agrega el nuevo enlace al elemento h1Contenido
         h3Contenido.innerHTML = enlace;
         h3Contenido.style.lineHeight = '5em';
+        h3Contenido.style.display = 'inline-block';
         contenido?.appendChild(h3Contenido);
     }
 });
